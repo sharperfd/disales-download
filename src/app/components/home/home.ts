@@ -11,7 +11,7 @@ export class HomeComponent {
   links = [
     {
       name: 'Play Store',
-      url: 'https://play.google.com/store/apps/details?id=com.krungsri.disales&pcampaignid=web_share',
+      url: 'https://drive.google.com/file/d/1Ay62gDCmEyT9H527C6-ANmKmLVHE3Tgl/view?usp=sharing',
       icon: 'android'
     },
     {
