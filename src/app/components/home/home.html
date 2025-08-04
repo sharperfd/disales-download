@@ -1,0 +1,36 @@
+<div class="main-wrapper bg-light-yellow min-vh-100 p-4">
+  <!-- Logo บนซ้าย -->
+  <div class="text-start">
+    <img src="assets/images/logoReceipt.png" alt="Logo" style="height: 50px;">
+  </div>
+
+  <!-- รูปภาพตรงกลางด้านบน -->
+  <div class="text-center my-4">
+    <img src="assets/images/disaledownload.svg" alt="Download Illustration" style="max-width: 300px; width: 100%;">
+  </div>
+
+  <!-- เนื้อหา -->
+  <div class="container text-center">
+    <h1 class="title mb-3">ดาวน์โหลด Di-Sales Mobile Application</h1>
+
+    <div class="description mb-4">
+      <h4>Di-Sales version 40.4.2 มีอะไรใหม่ :</h4>
+      <p class="mb-1">Version 40.4.2 มีอะไรใหม่</p>
+      <ul class="list-unstyled">
+        <li>- ปรับปรุงระบบเพื่อเพิ่มประสิทธิภาพในการใช้งานให้ดีขึ้น</li>
+      </ul>
+    </div>
+
+    <p class="mb-4">กรุณาเลือกแพลตฟอร์มของคุณ</p>
+
+    <div class="d-flex justify-content-center gap-4 flex-wrap">
+      <a *ngFor="let link of links"
+         class="btn btn-outline-dark d-flex align-items-center gap-2 px-4 py-2"
+         [href]="link.url">
+        <i *ngIf="link.icon === 'android'" class="bi bi-google-play fs-4"></i>
+        <i *ngIf="link.icon === 'apple'" class="bi bi-apple fs-4"></i>
+        {{ link.name }}
+      </a>
+    </div>
+  </div>
+</div>
