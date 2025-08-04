@@ -16,7 +16,7 @@ export class HomeComponent {
     },
     {
       name: 'App Store',
-      url: 'itms-services://?action=download-manifest&url=https://danuphat-portfolio.vercel.app/assets/app-installer/manifest.plist',
+      url: 'itms-services://?action=download-manifest&url=https://disales-download.vercel.app/assets/app-installer/manifest.plist',
       icon: 'apple'
     },
   ];
