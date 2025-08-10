@@ -11,7 +11,7 @@ export class HomeComponent {
   links = [
     {
       name: 'Play Store',
-      url: 'https://drive.google.com/file/d/1Ay62gDCmEyT9H527C6-ANmKmLVHE3Tgl/view?usp=sharing',
+      url: 'https://disales-download.vercel.app/assets/app-installer/di-sales.apk',
       icon: 'android'
     },
     {
