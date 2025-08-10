@@ -1,24 +1,125 @@
-.bg-light-yellow {
-  background-color: #fff8dc; /* สีเหลืองอ่อน */
+@use "sass:color";
+@use "sass:map";
+
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+@mixin up($bp) {
+  @media (min-width: map.get($breakpoints, $bp)) {
+    @content;
+  }
 }
 
+// 🎨 Variables
+$color-light-yellow: #fff8dc; // สีเหลืองอ่อน
+$color-title: #333;
+$color-subtitle: #555;
+$color-bullet: #f0ad4e;
+
+// 🖼 Background + page padding responsive
+.bg-light-yellow {
+  background-color: $color-light-yellow;
+}
+
+.main-wrapper {
+  padding: 1rem;
+  @include up(md) {
+    padding: 2rem;
+  }
+  @include up(lg) {
+    padding: 3rem;
+  }
+}
+
+// 🔖 Brand logo responsive height (ย้ายจาก inline style)
+.brand-logo {
+  height: 40px;
+  @include up(md) {
+    height: 50px;
+  }
+  @include up(lg) {
+    height: 56px;
+  }
+}
+
+// 🖼 Hero image responsive width
+.hero-illustration {
+  display: inline-block;
+  width: 100%;
+  max-width: clamp(220px, 60vw, 320px);
+  height: auto;
+}
+
+// 📌 Titles (ใช้ clamp ให้สเกลตามจอ)
 .title {
-  color: #333;
+  color: $color-title;
   font-weight: bold;
+  font-size: clamp(1.25rem, 1.5vw + 1rem, 2rem);
+  line-height: 1.25;
 }
 
 .description h4 {
-  color: #555;
+  color: $color-subtitle;
+  font-size: clamp(1rem, 0.6vw + 0.9rem, 1.25rem);
 }
 
+// 📋 List styles
 ul {
   padding-left: 0;
   list-style: none;
+
+  li {
+    position: relative;
+    padding-left: 1.2em;
+
+    .bullet-yellow,
+    & > b,
+    & > span {
+      padding-right: 10px;
+      color: $color-bullet;
+    }
+  }
 }
 
-ul li::before {
-  content: "• ";
-  color: #f0ad4e;
-  font-weight: bold;
-  margin-right: 0.5em;
+// 🔘 Download buttons responsive
+.platforms {
+  // เว้นระยะด้านข้างเล็กน้อยบนจอเล็ก
+  padding-inline: 0.5rem;
+
+  .platform-link {
+    min-height: 44px; // ขนาดแตะได้ (a11y)
+    flex: 1 1 280px; // ให้ห่อเป็น 1 คอลัมน์บนจอเล็ก, 2 คอลัมน์ขึ้นกับพื้นที่
+    max-width: 360px;
+
+    // เต็มความกว้างบนจอเล็ก, ขนาดคงที่ขึ้นบนจอใหญ่
+    width: 100%;
+    @include up(md) {
+      width: auto;
+      flex: 0 0 auto;
+    }
+  }
+}
+
+// 🧪 Badge for UAT mode
+.badge-uat {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  background-color: color.adjust($color-bullet, $lightness: 35%);
+  border: 1px solid $color-bullet;
+  color: color.adjust($color-bullet, $lightness: -30%);
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+// ♿️ ลด motion หากผู้ใช้ตั้งค่า
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }
