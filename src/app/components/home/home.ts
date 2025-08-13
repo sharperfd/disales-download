@@ -18,19 +18,13 @@ export class HomeComponent {
 
   mode: Mode = 'prod';
 
-  get isUAT() { return this.mode === 'uat'; }
+  get isUAT() {
+    return this.mode === 'uat';
+  }
 
   // base ที่แตกต่างกันระหว่าง prod และ uat
   private get baseDownloadPath() {
-    // ถ้าเก็บไฟล์ไว้โดเมนเดียวกัน แค่ต่างโฟลเดอร์ให้ใช้แบบนี้:
-    // return this.isUAT
-    //   ? 'https://disales-download.vercel.app/uat/assets/app-installer'
-    //   : 'https://disales-download.vercel.app/assets/app-installer';
-
-    // ถ้าอยากอ้างอิงแบบ relative ภายใต้เว็บเดียวกันก็ได้ (ดีเวลลอปสะดวก):
-    return this.isUAT
-      ? '/assets/app-installer/uat'
-      : '/assets/app-installer';
+    return this.isUAT ? '/assets/app-installer/uat' : '/assets/app-installer';
   }
 
   links: Array<{ name: string; url: string; icon: 'android' | 'apple' }> = [];
