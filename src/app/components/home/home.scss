@@ -15,10 +15,16 @@ $breakpoints: (
 }
 
 // 🎨 Variables
-$color-light-yellow: #fff8dc; // สีเหลืองอ่อน
-$color-title: #333;
+$color-light-yellow: #fff8dc;
+$color-primary: #f0ad4e;
+$color-primary-dark: #e69500;
+$color-title: #2c3e50;
 $color-subtitle: #555;
-$color-bullet: #f0ad4e;
+$color-text: #333;
+$color-card-bg: #ffffff;
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+$shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+$shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
 
 // 🖼 Background + page padding responsive
 .bg-light-yellow {
@@ -27,99 +33,296 @@ $color-bullet: #f0ad4e;
 
 .main-wrapper {
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  
   @include up(md) {
     padding: 2rem;
   }
+  
   @include up(lg) {
-    padding: 3rem;
+    padding: 3rem 4rem;
   }
 }
 
-// 🔖 Brand logo responsive height (ย้ายจาก inline style)
+// 📍 Header Section
+.header-section {
+  padding: 0.5rem 0;
+  
+  @include up(md) {
+    padding: 1rem 0;
+  }
+}
+
+// 🔖 Brand logo responsive
 .brand-logo {
   height: 40px;
+  transition: transform 0.3s ease;
+  
   @include up(md) {
     height: 50px;
   }
+  
   @include up(lg) {
     height: 56px;
   }
-}
-
-// 🖼 Hero image responsive width
-.hero-illustration {
-  display: inline-block;
-  width: 100%;
-  max-width: clamp(220px, 60vw, 320px);
-  height: auto;
-}
-
-// 📌 Titles (ใช้ clamp ให้สเกลตามจอ)
-.title {
-  color: $color-title;
-  font-weight: bold;
-  font-size: clamp(1.25rem, 1.5vw + 1rem, 2rem);
-  line-height: 1.25;
-}
-
-.description h4 {
-  color: $color-subtitle;
-  font-size: clamp(1rem, 0.6vw + 0.9rem, 1.25rem);
-}
-
-// 📋 List styles
-ul {
-  padding-left: 0;
-  list-style: none;
-
-  li {
-    position: relative;
-    padding-left: 1.2em;
-
-    .bullet-yellow,
-    & > b,
-    & > span {
-      padding-right: 10px;
-      color: $color-bullet;
-    }
+  
+  &:hover {
+    transform: scale(1.05);
   }
 }
 
-// 🔘 Download buttons responsive
+// 🖼 Hero Section
+.hero-section {
+  padding: 1rem 0;
+  
+  @include up(md) {
+    padding: 2rem 0;
+  }
+}
+
+.hero-illustration {
+  display: inline-block;
+  width: 100%;
+  max-width: clamp(200px, 50vw, 280px);
+  height: auto;
+  animation: float 3s ease-in-out infinite;
+  
+  @include up(md) {
+    max-width: clamp(250px, 45vw, 320px);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+// 🎴 Content Card
+.content-card {
+  background: $color-card-bg;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: $shadow-md;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  transition: box-shadow 0.3s ease;
+  
+  @include up(md) {
+    padding: 2.5rem;
+    border-radius: 24px;
+  }
+  
+  @include up(lg) {
+    padding: 3rem;
+  }
+  
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+}
+
+// 📌 Title
+.title {
+  color: $color-title;
+  font-weight: 700;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1.3;
+  margin: 0;
+}
+
+// 📦 Version Info Card
+.version-info-card {
+  background: linear-gradient(135deg, #fff9e6 0%, #fff3d6 100%);
+  border-left: 4px solid $color-primary;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: $shadow-sm;
+  
+  @include up(md) {
+    padding: 1.5rem 2rem;
+  }
+}
+
+.version-title {
+  color: $color-title;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  
+  i {
+    color: $color-primary;
+  }
+}
+
+.feature-list {
+  margin: 0;
+  padding: 0;
+}
+
+.feature-item {
+  padding: 0.5rem 0;
+  color: $color-text;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  display: flex;
+  align-items: center;
+  line-height: 1.6;
+  
+  i {
+    color: $color-primary;
+    flex-shrink: 0;
+    font-size: 1rem;
+  }
+  
+  span {
+    flex: 1;
+  }
+}
+
+// 📱 Platform Selector
+.platform-selector-section {
+  margin-top: 1rem;
+}
+
+.platform-prompt {
+  color: $color-subtitle;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  font-weight: 500;
+  margin: 0;
+}
+
+// 🔘 Platform Links
 .platforms {
-  // เว้นระยะด้านข้างเล็กน้อยบนจอเล็ก
-  padding-inline: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 0;
+  
+  @include up(md) {
+    gap: 1.25rem;
+  }
+}
 
-  .platform-link {
-    min-height: 44px; // ขนาดแตะได้ (a11y)
-    flex: 1 1 280px; // ให้ห่อเป็น 1 คอลัมน์บนจอเล็ก, 2 คอลัมน์ขึ้นกับพื้นที่
-    max-width: 360px;
+.platform-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  
+  min-height: 56px;
+  padding: 0.875rem 1.75rem;
+  
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
+  color: #ffffff;
+  
+  border: none;
+  border-radius: 12px;
+  
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  font-weight: 600;
+  text-decoration: none;
+  
+  box-shadow: $shadow-sm;
+  transition: all 0.3s ease;
+  
+  cursor: pointer;
+  
+  flex: 1 1 auto;
+  min-width: 160px;
+  max-width: 220px;
+  
+  @include up(md) {
+    flex: 0 1 auto;
+    min-width: 180px;
+  }
+  
+  i {
+    font-size: 1.5rem;
+  }
+  
+  .platform-name {
+    white-space: nowrap;
+  }
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: $shadow-md;
+    background: linear-gradient(135deg, $color-primary-dark 0%, darken($color-primary-dark, 5%) 100%);
+  }
+  
+  &:active {
+    transform: translateY(-1px);
+  }
+}
 
-    // เต็มความกว้างบนจอเล็ก, ขนาดคงที่ขึ้นบนจอใหญ่
-    width: 100%;
-    @include up(md) {
-      width: auto;
-      flex: 0 0 auto;
-    }
+// 📅 Release Info
+.release-info {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.release-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+  color: #ffffff;
+  border-radius: 20px;
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+  font-weight: 500;
+  box-shadow: $shadow-sm;
+  gap: 0.5rem;
+  
+  i {
+    font-size: 1rem;
   }
 }
 
 // 🧪 Badge for UAT mode
 .badge-uat {
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.5rem;
-  background-color: color.adjust($color-bullet, $lightness: 35%);
-  border: 1px solid $color-bullet;
-  color: color.adjust($color-bullet, $lightness: -30%);
-  font-weight: 600;
-  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ffd89b 0%, #ffb347 100%);
+  border: 2px solid $color-primary-dark;
+  color: darken($color-primary-dark, 10%);
+  font-weight: 700;
+  font-size: clamp(0.75rem, 1.2vw, 0.875rem);
+  letter-spacing: 0.5px;
+  box-shadow: $shadow-sm;
 }
 
-// ♿️ ลด motion หากผู้ใช้ตั้งค่า
+// ♿️ Accessibility - ลด motion
 @media (prefers-reduced-motion: reduce) {
   * {
-    transition: none !important;
-    animation: none !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// 📱 Mobile optimizations
+@media (max-width: 575px) {
+  .content-card {
+    border-radius: 12px;
+  }
+  
+  .version-info-card {
+    border-radius: 8px;
+  }
+  
+  .platform-link {
+    width: 100%;
+    max-width: 100%;
   }
 }
